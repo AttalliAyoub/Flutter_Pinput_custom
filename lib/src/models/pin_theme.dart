@@ -44,7 +44,7 @@ class PinTheme {
   ///  this.shape = BoxShape.rectangle,
   ///  ```
   /// The decoration of each [Pinput] submitted field
-  final BoxDecoration? decoration;
+  final Decoration? decoration;
 
   const PinTheme({
     this.width,
