@@ -73,7 +73,7 @@ class PinTheme {
     double? height,
     TextStyle? textStyle,
     BoxConstraints? constraints,
-    BoxDecoration? decoration,
+    Decoration? decoration,
     EdgeInsetsGeometry? padding,
     EdgeInsetsGeometry? margin,
   }) {
@@ -85,38 +85,6 @@ class PinTheme {
       decoration: decoration ?? this.decoration,
       padding: padding ?? this.padding,
       margin: margin ?? this.margin,
-    );
-  }
-
-  PinTheme copyDecorationWith({
-    Color? color,
-    DecorationImage? image,
-    BoxBorder? border,
-    BorderRadiusGeometry? borderRadius,
-    List<BoxShadow>? boxShadow,
-    Gradient? gradient,
-    BlendMode? backgroundBlendMode,
-    BoxShape? shape,
-  }) {
-    assert(decoration != null);
-    return copyWith(
-      decoration: decoration?.copyWith(
-        color: color,
-        image: image,
-        border: border,
-        borderRadius: borderRadius,
-        boxShadow: boxShadow,
-        gradient: gradient,
-        backgroundBlendMode: backgroundBlendMode,
-        shape: shape,
-      ),
-    );
-  }
-
-  PinTheme copyBorderWith({required Border border}) {
-    assert(decoration != null);
-    return copyWith(
-      decoration: decoration?.copyWith(border: border),
     );
   }
 }

@@ -58,9 +58,6 @@ class _FilledRoundedPinPutState extends State<FilledRoundedPinPut> {
         focusedPinTheme: defaultPinTheme.copyWith(
           height: 68,
           width: 64,
-          decoration: defaultPinTheme.decoration!.copyWith(
-            border: Border.all(color: borderColor),
-          ),
         ),
         errorPinTheme: defaultPinTheme.copyWith(
           decoration: BoxDecoration(

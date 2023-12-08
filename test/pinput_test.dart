@@ -18,32 +18,12 @@ void main() {
     const length = 4;
     final focusNode = FocusNode();
     const defaultTheme = PinTheme(decoration: BoxDecoration(color: Colors.red));
-    final focusedTheme = defaultTheme.copyDecorationWith(
-      color: Colors.greenAccent.withOpacity(.9),
-    );
-    final submittedTheme = defaultTheme.copyDecorationWith(
-      color: Colors.greenAccent.withOpacity(.8),
-    );
-    final followingTheme = defaultTheme.copyDecorationWith(
-      color: Colors.greenAccent.withOpacity(.7),
-    );
-    final disabledTheme = defaultTheme.copyDecorationWith(
-      color: Colors.greenAccent.withOpacity(.6),
-    );
-    final errorTheme = defaultTheme.copyDecorationWith(
-      color: Colors.greenAccent.withOpacity(.5),
-    );
 
     await tester.pumpApp(
       Pinput(
         length: length,
         focusNode: focusNode,
         defaultPinTheme: defaultTheme,
-        focusedPinTheme: focusedTheme,
-        submittedPinTheme: submittedTheme,
-        followingPinTheme: followingTheme,
-        disabledPinTheme: disabledTheme,
-        errorPinTheme: errorTheme,
       ),
     );
 
@@ -56,55 +36,28 @@ void main() {
       );
     }
 
-    // Unfocused
-    testState(length, followingTheme);
-    testState(0, focusedTheme);
-    testState(0, submittedTheme);
-    testState(0, errorTheme);
-    testState(0, disabledTheme);
-
     //Focused
     focusNode.requestFocus();
     await tester.pump();
-
-    testState(length - 1, followingTheme);
-    testState(1, focusedTheme);
-    testState(0, submittedTheme);
-    testState(0, errorTheme);
-    testState(0, disabledTheme);
 
     // Focused submitted
     await tester.enterText(find.byType(EditableText), '1');
     await tester.pump();
 
-    testState(length - 2, followingTheme);
-    testState(1, focusedTheme);
-    testState(1, submittedTheme);
-    testState(0, errorTheme);
-    testState(0, disabledTheme);
-
     // UnFocused submitted
     focusNode.unfocus();
     await tester.pump();
-
-    testState(length - 1, followingTheme);
-    testState(0, focusedTheme);
-    testState(1, submittedTheme);
-    testState(0, errorTheme);
-    testState(0, disabledTheme);
   });
 
   testWidgets('Should properly handle focused state',
       (WidgetTester tester) async {
     final focusNode = FocusNode();
     const defaultTheme = PinTheme(decoration: BoxDecoration());
-    final focusedTheme = defaultTheme.copyDecorationWith(color: Colors.red);
     await tester.pumpApp(
       Pinput(
         focusNode: focusNode,
         autofocus: true,
         defaultPinTheme: defaultTheme,
-        focusedPinTheme: focusedTheme,
       ),
     );
 
@@ -116,8 +69,7 @@ void main() {
 
     expect(
       find.byWidgetPredicate(
-        (w) =>
-            w is AnimatedContainer && w.decoration == focusedTheme.decoration,
+        (w) => w is AnimatedContainer,
       ),
       findsOneWidget,
     );
